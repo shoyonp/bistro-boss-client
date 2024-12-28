@@ -4,12 +4,13 @@ import featuredImg from "../../../assets/home/featured.jpg";
 import "./Featured.css";
 const Featured = () => {
   return (
-    <div className="featured-item text-white pt-8 my-20">
+    <div className="featured-item bg-fixed  text-white pt-8 my-20">
+      <div className=" bg-gradient-to-b from-black/40 to-black/70">
       <SectionTitle
         heading="FEATURED ITEM"
         subHeading="Check it out"
       ></SectionTitle>
-      <div className="flex justify-center items-center pb-20 pt-12 px-36 ">
+      <div className="flex justify-center  items-center pb-20 pt-12 px-36 ">
         <div className="">
           <img src={featuredImg} alt="" />
         </div>
@@ -24,8 +25,9 @@ const Featured = () => {
             inventore, ullam magni perferendis sit veritatis? Amet ad quasi
             tempora nobis quia praesentium veniam! Quasi, asperiores ex.
           </p>
-          <button className="btn btn-outline">Order Now</button>
+          <button className="btn text-white btn-outline border-0 border-b-4">Order Now</button>
         </div>
+      </div>
       </div>
     </div>
   );
