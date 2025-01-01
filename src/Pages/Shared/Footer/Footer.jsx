@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer bg-neutral text-neutral-content p-10">
-        <asi de>
+        <aside>
           <svg
             width="50"
             height="50"
@@ -21,7 +21,7 @@ const Footer = () => {
             <br />
             Providing reliable tech since 1992
           </p>
-        </asi>
+        </aside>
         <nav>
           <h6 className="footer-title">Social</h6>
           <div className="grid grid-flow-col gap-4">
