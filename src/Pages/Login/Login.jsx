@@ -8,7 +8,7 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -31,23 +31,7 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
-      Swal.fire({
-        title: "User Login Successfull",
-        showClass: {
-          popup: `
-            animate__animated
-            animate__fadeInUp
-            animate__faster
-          `,
-        },
-        hideClass: {
-          popup: `
-            animate__animated
-            animate__fadeOutDown
-            animate__faster
-          `,
-        },
-      });
+      toast.success('Login Successfull')
       navigate(from, { replace: true });
     });
   };
