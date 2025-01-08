@@ -26,7 +26,10 @@ const NavBar = () => {
         <NavLink to="/order/salad">Order</NavLink>
       </li>
       <li>
-        <Link to="/">
+        <NavLink to="/contact">Contact Us</NavLink>
+      </li>
+      <li>
+        <Link to="/dashboard/cart">
           <button className="btn">
           <ImCart />
             <div className="badge badge-secondary">+{cart.length}</div>
