@@ -3,9 +3,12 @@ import SectionTitle from "../../../components/SectionTitle";
 import useMenu from "../../../hooks/useMenu";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const ManageItems = () => {
-  const [menu] = useMenu();
+  const [menu, , refetch] = useMenu();
+  const axiosSecure = useAxiosSecure();
 
   const handleDeleteItem = (item) => {
     Swal.fire({
@@ -15,9 +18,15 @@ const ManageItems = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/menu/${item._id}`);
+        // console.log(res.data);
+        if (res.data.deletedCount > 0) {
+          refetch();
+          toast.success(`${item.name} has been deleted`);
+        }
         // Swal.fire({
         //   title: "Deleted!",
         //   text: "Your file has been deleted.",
@@ -26,7 +35,6 @@ const ManageItems = () => {
       }
     });
   };
-
 
   return (
     <div>
@@ -67,10 +75,7 @@ const ManageItems = () => {
                   <td>{item.name}</td>
                   <td className="">${item.price}</td>
                   <td>
-                    <button
-                      
-                      className="btn btn-md bg-[#D1A054] "
-                    >
+                    <button className="btn btn-md bg-[#D1A054] ">
                       <FaEdit className="text-white"></FaEdit>
                     </button>
                   </td>
