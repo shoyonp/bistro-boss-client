@@ -3,6 +3,7 @@ import useCart from "../../../hooks/useCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -20,8 +21,7 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/carts/${id}`)
-        .then((res) => {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -40,7 +40,15 @@ const Cart = () => {
       <div className="flex justify-evenly mb-8">
         <h2 className="text-2xl">Items: {cart.length}</h2>
         <h2 className="text-2xl">Total Price: {totalPrice}</h2>
-        <button className="btn btn-primary">Pay</button>
+        {cart.length ? (
+          <Link to="/dashboard/payment">
+            <button className="btn bg-[#D1A054]">PAY</button>
+          </Link>
+        ) : (
+          <button disabled className="btn bg-[#D1A054]">
+            PAY
+          </button>
+        )}
       </div>
       <div className="overflow-x-auto ">
         <table className="table w-full">
@@ -75,9 +83,9 @@ const Cart = () => {
                 <th>
                   <button
                     onClick={() => handleDelete(item._id)}
-                    className="btn btn-ghost btn-lg"
+                    className="btn btn-md bg-[#B91C1C]"
                   >
-                    <FaTrash className="text-red-600"></FaTrash>
+                    <FaTrash className="text-white"></FaTrash>
                   </button>
                 </th>
               </tr>
