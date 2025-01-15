@@ -31,7 +31,7 @@ const useAxiosSecure = () => {
       return response;
     },
     async (error) => {
-      const status = error.response.status;
+      const status = error?.response?.status;
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
       // for 401  or 403 logout the user to the login
