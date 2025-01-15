@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -12,8 +14,9 @@ const CheckoutForm = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [cart] = useCart();
+  const [cart,refetch] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (totalPrice > 0) {
@@ -78,7 +81,13 @@ const CheckoutForm = () => {
           status: "pending",
         };
         const res = await axiosSecure.post("/payments", payment);
-        console.log("payment saved", res.data);
+        if(res?.data?.paymentResult?.insertedId){
+          toast.success('Thank you for payment')
+          navigate('/dashboard/paymentHistory')
+        }
+        refetch()
+
+
       }
     }
   };
