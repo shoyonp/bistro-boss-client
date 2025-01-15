@@ -26,7 +26,7 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          // creat user entry in the dtabase
+          // create user entry in the dtabase
           const userInfo = {
             name: data.name,
             email: data.email,
